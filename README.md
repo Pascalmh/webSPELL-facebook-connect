@@ -13,4 +13,4 @@ Facebook Connect for webSPELL 4.2.*
 - Add the row "fbID VARCHAR(255)" to your PREFIX_user table 
 
 ### Modify _facebook.php
-- Fill in the *appId* and *secret* on lines 4/5
+- Fill in the *appId* and *secret* on lines 4/5 (you need to create a new App to get this data https://developers.facebook.com/apps)
