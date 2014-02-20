@@ -1,25 +1,37 @@
 <?php
 
- require 'facebook/src/facebook.php';
-$facebook = new Facebook(array(
-  'appId'  => '',
-  'secret' => '',
-)); 
+require_once("facebook.php");
+
+$config = array(
+    'appId' => 'YOUR_APP_ID',
+    'secret' => 'YOUR_APP_SECRET',
+    'fileUpload' => false, // optional
+    'allowSignedRequest' => false, // optional, but should be set to false for non-canvas apps
+);
  
 // Get User ID
-$user = $facebook->getUser(); 
- 
-if ($user) {
-  try {
-    // Proceed knowing you have a logged in user who's authenticated.
-    $user_profile = $facebook->api('/me');
-  } catch (FacebookApiException $e) {
-    error_log($e);
-    $user = null;
-  }
+$user_id = $facebook->getUser();
+
+if($user_id) {
+    try {
+        $user_profile = $facebook->api('/me','GET');
+    } catch(FacebookApiException $e) {
+        // If the user is logged out, you can have a
+        // user ID even though the access token is invalid.
+        // In this case, we'll get an exception, so we'll
+        // just ask the user to login again here.
+        $login_url = $facebook->getLoginUrl();
+        echo 'Please <a href="' . $login_url . '">login.</a>';
+        error_log($e->getType());
+        error_log($e->getMessage());
+    }
+
+}
+else {
+
 }
 
-if ($user) {
+if ($user_id) {
   $next = 'http://'.$hp_url.'/logout.php';
   $logoutUrl = $facebook->getLogoutUrl(array('next' => $next));
 } else {
@@ -29,7 +41,7 @@ if ($user) {
 if(!isset($uid)) $uid = $user_profile['id'];
 
 $ds=mysql_fetch_array(safe_query("SELECT * FROM ".PREFIX."user WHERE fbID = '".$uid."' "));
-if($user && $uid!=$ds['fbID']) {
+if($user_id && $uid!=$ds['fbID']) {
  $registerdate = time();           
  $firstName   = $user_profile['first_name'];
  $lastName    = $user_profile['last_name'];
@@ -90,18 +102,6 @@ if($user && $uid!=$ds['fbID']) {
   $insertid = mysql_insert_id();
 	// insert in user_groups
 	safe_query("INSERT INTO ".PREFIX."user_groups ( userID ) values('$insertid' )");
-	// Send Email with Password to User
-  $message = 'Hi '.$firstName.' '.$lastName.'
-  Welcome to '.$myclanname.'
-  You can also LogIn with this Information:
-  Username: '.$nickname.'
-  Password: '.$newpwd.'
-  
-  You will not need it unless you can not LogIn with your Facebook Account.
-  
-  have fun on our page
-  http://'.$hp_url.'/';
-  mail($mail,'New Account on '.$myclanname.'', $message, "From:".$admin_email."\nContent-type: text/plain; charset=utf-8\n");
 }
  
 if(!$loggedin && $uid!="") {
