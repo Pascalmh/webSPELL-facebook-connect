@@ -46,7 +46,7 @@ if($loggedin) {
 	echo $logged;
 }
 else {
-    require_once('php-sdk/facebook.php');
+    require_once('facebook-php-sdk/src/facebook.php');
 
     $facebook_appID = 'YOUR_APP_ID';
     $facebook_secret = 'YOUR_APP_SECRET';
