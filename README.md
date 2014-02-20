@@ -9,6 +9,7 @@ Facebook Connect for webSPELL 4.2.*
 ## Install
 
 - Upload `login.php` and `templates/login.html` and the `facebook-php-sdk` folder into the root webSPELL-Directory
+
 Your webSPELL-Directory should now contain this files and folders (you won't need the other facebook-php-sdk files and folders)
 ```
 facebook-php-sdk/src/base_facebook.php
