@@ -1,0 +1,19 @@
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=$facebook_appID";
+    fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+<form method="post" name="login" action="checklogin.php">
+    <input name="ws_user" type="text" size="13" placeholder="Username">
+    <input name="pwd" type="password" size="13" placeholder="Password">
+    <input type="submit" name="submit" value="%login%" style="margin:2px;" /><br>
+    &#8226; <a href="index.php?site=register">%register_now%</a><br>
+    &#8226; <a href="index.php?site=lostpassword">%lost_password%</a><br>
+    &#8226; <a href="index.php?site=registered_users">%registered_users%</a>
+</form>
+
+<div class="fb-login-button" data-max-rows="1" data-size="medium" data-show-faces="false" data-auto-logout-link="false" scope="email"></div>
