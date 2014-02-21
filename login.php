@@ -28,9 +28,8 @@
 $_language->read_module('login');
 
 require_once('facebook-php-sdk/src/facebook.php');
-$facebook_appID = 'YOUR_APP_ID';
-$facebook_secret = 'YOUR_APP_SECRET';
 
+include('_facebook.php');
 $facebook = new Facebook(array(
     'appId' => $facebook_appID,
     'secret' => $facebook_secret,
