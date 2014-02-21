@@ -2,27 +2,15 @@ Facebook Connect for webSPELL 4.2.*
 =========================
 
 ## Requirements
-- Working installation of [webSPELL 4.2.*](https://github.com/webSPELL/)
+- Working [webSPELL 4.2.*](installation https://github.com/webSPELL/)
 - [Facebook PHP SDK](https://github.com/facebook/facebook-php-sdk)
-- Your own [Facebook App](https://developers.facebook.com/apps)
 
 ## Install
 
-- Upload `login.php` and `templates/login.html` and the `facebook-php-sdk` folder into the root webSPELL-Directory
+- Upload _facebook.php into your root webSPELL-Directory
+- Put the src-Folder of the Facebook PHP SDK into a Folder named "facebook", then upload it into the root webSPELL-Directory aswell.
+- Add the row "fbID VARCHAR(255)" to your PREFIX_user table 
+- Add the [Facebook Login Button](https://developers.facebook.com/docs/plugins/login-button)
 
-Your webSPELL-Directory should now contain this files and folders (you won't need the other facebook-php-sdk files and folders)
-``` php
-facebook-php-sdk/src/base_facebook.php
-facebook-php-sdk/src/facebook.php
-facebook-php-sdk/src/fb_ca_chain_bundle.crt
-templates/login.html
-index.php // this being your webSPELL index.php
-login.php
-```
-
-- Add the row "fbID VARCHAR(255)" to your PREFIX_user table
-- Open login.php and search for `YOUR_APP_ID` and `YOUR_APP_SECRET` fill in the information from your [Facebook App](https://developers.facebook.com/apps)
-
-## Customization
-
-You might want to add an [Facebook Login Buttons](https://developers.facebook.com/docs/facebook-login/checklist/#brandedlogin) into your templates/login.html
+### Modify _facebook.php
+- Fill in the *appId* and *secret* on lines 4/5 (you need to create a new App to get this data https://developers.facebook.com/apps)
