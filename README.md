@@ -22,3 +22,7 @@ login.php
 
 - Add the row "fbID VARCHAR(255)" to your PREFIX_user table
 - Open login.php and search for `YOUR_APP_ID` and `YOUR_APP_SECRET` fill in the information from your [Facebook App](https://developers.facebook.com/apps)
+
+## Customization
+
+You might want to add an [Facebook Login Buttons](https://developers.facebook.com/docs/facebook-login/checklist/#brandedlogin) into your templates/login.html
