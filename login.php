@@ -99,7 +99,8 @@ else {
                 // We have a Facebook User that is not yet registered on our webSPELL Site, lets sign him up
 
                 $registerdate=time();
-                $mail = $user_profile['email'];
+                if(!empty($user_profile['email'])) $mail = $user_profile['email'];
+                else $mail = $user_profile['username'].'@facebook.com';
                 $md5pwd = md5(stripslashes(RandPass(6)));
 
                 safe_query("INSERT INTO `".PREFIX."user` (`registerdate`, `lastlogin`, `username`, `password`, `nickname`, `email`, `activated`,`ip`) VALUES ('$registerdate', '$registerdate', '$username', '$md5pwd', '$nickname', '$mail', '1', '".$GLOBALS['ip']."')");
